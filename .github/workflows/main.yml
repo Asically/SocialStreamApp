@@ -1,26 +1,3 @@
-- name: Upload a Build Artifact
-  uses: actions/upload-artifact@v4.6.2
-  with:
-    # Artifact name: Specify the name for the artifact (default is "artifact" if not specified)
-    name: build-output    # Change "build-output" to whatever name you prefer
-    
-    # Path: Specify the file, directory, or wildcard pattern describing what to upload
-    path: ./build/        # Replace "./build/" with the actual path you want to upload (can be a file, directory, or wildcard)
-
-    # If no files are found using the provided path
-    if-no-files-found: warn  # Options: warn (default), error, or ignore
-
-    # Duration after which the artifact will expire in days (0 means default retention, max 90 days)
-    retention-days: 7       # Set to a value between 1 and 90, or 0 for default retention
-
-    # Compression level for Zlib when applying to the artifact archive (0 to 9)
-    compression-level: 6    # Options: 0 (no compression) to 9 (best compression). Default is 6
-
-    # Overwrite: Whether to delete any existing artifact with the same name before uploading a new one
-    overwrite: true         # Set to true to overwrite if an artifact with the same name already exists
-
-    # Include hidden files: Whether to include hidden files (those starting with ".") in the artifact
-    include-hidden-files: false  # Set to true to include hidden files, false to exclude them
 - name: Cache
   uses: actions/cache@v4.2.3
   with:
