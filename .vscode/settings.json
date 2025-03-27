@@ -3,10 +3,12 @@
         "dbaeumer",
         "devcontainers",
         "esbenp",
+        "gradlew",
         "libx",
         "maxrate",
         "rtmp",
-        "socialstream"
+        "socialstream",
+        "temurin"
     ],
     "files.autoSave": "off"
 }
