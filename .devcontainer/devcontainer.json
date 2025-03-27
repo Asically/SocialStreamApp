@@ -1,0 +1,22 @@
+{
+    "name": "Social Media Streaming App",
+    "image": "mcr.microsoft.com/vscode/devcontainers/javascript-node:0-18",
+    "customizations": {
+      "vscode": {
+        "settings": {
+          "terminal.integrated.shell.linux": "/bin/bash"
+        },
+    "extensions": [
+      "dbaeumer.vscode-eslint",
+      "esbenp.prettier-vscode",
+      "ms-azuretools.vscode-docker"
+    ],
+    "postCreateCommand": "npm install",
+    "forwardPorts": [
+      5000
+    ],
+    "remoteUser": "vscode"
+      }
+    }
+  }
+  

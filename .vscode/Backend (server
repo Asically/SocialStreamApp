@@ -1,0 +1,23 @@
+app.post('/multistream', (req, res) => {
+    const { streamKey, platforms } = req.body;
+    platforms.forEach(platform => {
+        let streamUrl;
+        switch (platform) {
+            case 'twitch':
+                streamUrl = `rtmp://live.twitch.tv/app/${streamKey}`;
+                break;
+            case 'youtube':
+                streamUrl = `rtmp://a.rtmp.youtube.com/live2/${streamKey}`;
+                break;
+            // Add more platforms
+        }
+        exec(`ffmpeg -re -i input.mp4 -c:v libx264 -preset fast -b:v 1500k -maxrate 1500k -bufsize 3000k -pix_fmt yuv420p -g 50 -c:a aac -b:a 160k -ar 44100 -f flv ${streamUrl}`, (error, stdout, stderr) => {
+            if (error) {
+                console.error(`Error: ${error.message}`);
+                return res.status(500).json({ message: 'Streaming failed' });
+            }
+            console.log(`Streaming started: ${stdout}`);
+        });
+    });
+    res.status(200).json({ message: 'Multistreaming started successfully' });
+});

@@ -1,0 +1,6 @@
+// Donation Route
+app.post('/donate', async (req, res) => {
+    const { userId, amount } = req.body;
+    // Process donation (e.g., through PayPal API)
+    res.status(200).json({ message: `Donation of $${amount} successful!` });
+});

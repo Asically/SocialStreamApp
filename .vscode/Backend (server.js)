@@ -1,0 +1,12 @@
+// User Profile Update Route
+app.put('/update-profile', async (req, res) => {
+    const { userId, bio, profilePic } = req.body;
+    const user = await User.findById(userId);
+    if (!user) {
+        return res.status(404).json({ message: 'User not found' });
+    }
+    user.bio = bio || user.bio;
+    user.profilePic = profilePic || user.profilePic;
+    await user.save();
+    res.status(200).json({ message: 'Profile updated successfully' });
+});
