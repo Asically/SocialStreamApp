@@ -19,10 +19,11 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    -  name: Debug: List project files
+    - name: Debug: List project files
       run: |
-        echo "Current working directory: $(pwd)"
-        ls -R
+          echo "Current working directory: $(pwd)"
+          ls -R
+
 
     - name: Find and set Gradle wrapper path
       run: |
