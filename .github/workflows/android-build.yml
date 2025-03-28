@@ -19,15 +19,28 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
+    - name: Install dependencies
+      run: sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
+
     - name: Grant execute permission to Gradle
       run: chmod +x gradlew
 
     - name: Build APK
-      run: ./gradlew assembleRelease
+      run: ./gradlew assembleRelease --stacktrace
 
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
         name: apk-release
         path: app/build/outputs/apk/release/*.apk
+
+    - name: List available artifacts
+      run: ls -R $GITHUB_WORKSPACE
+
+    - name: Download a Build Artifact
+      uses: actions/download-artifact@v4.2.1
+      with:
+        name: apk-release
+        path: downloaded-artifacts
+
 
