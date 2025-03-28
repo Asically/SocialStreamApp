@@ -20,14 +20,10 @@ jobs:
         java-version: '17'
 
     - name: Debug: List project files
-      run: |
-          echo "Current working directory: $(pwd)"
-          ls -R
-
+      run: ls -R
 
     - name: Find and set Gradle wrapper path
       run: |
-        echo "Looking for gradlew in the repository..."
         GRADLEW_PATH=$(find . -name "gradlew" | head -n 1)
         if [ -z "$GRADLEW_PATH" ]; then
           echo "Error: gradlew not found! Check your repository structure." >&2
@@ -39,7 +35,6 @@ jobs:
 
     - name: Build APK
       run: |
-        echo "Building APK using gradlew..."
         "$GRADLEW_PATH" assembleRelease --stacktrace
 
     - name: Upload Build Artifacts
@@ -49,12 +44,11 @@ jobs:
         path: app/build/outputs/apk/release/*.apk
 
     - name: List available artifacts
-      run: |
-        echo "Listing all available artifacts..."
-        ls -R "$GITHUB_WORKSPACE"
+      run: ls -R "$GITHUB_WORKSPACE"
 
     - name: Download a Build Artifact
       uses: actions/download-artifact@v4.2.1
       with:
         name: apk-release
         path: downloaded-artifacts
+
