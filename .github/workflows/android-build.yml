@@ -23,9 +23,22 @@ jobs:
       run: |
         ls -R
 
-    - name: Find and set Gradle wrapper path
+    # Find and set Gradle wrapper path in ./project directory
+    - name: Find and set Gradle wrapper path (Project directory)
       run: |
-        GRADLEW_PATH=$(find . -name "gradlew" | head -n 1)
+        GRADLEW_PATH=$(find ./project -name "gradlew" -type f -print | head -n 1)
+        if [ -z "$GRADLEW_PATH" ]; then
+          echo "Error: gradlew not found! Check your repository structure." >&2
+          exit 1
+        fi
+        chmod +x "$GRADLEW_PATH"
+        echo "Using gradlew at $GRADLEW_PATH"
+        echo "GRADLEW_PATH=$GRADLEW_PATH" >> $GITHUB_ENV
+
+    # Find and set Gradle wrapper path in root directory
+    - name: Find and set Gradle wrapper path (Root directory)
+      run: |
+        GRADLEW_PATH=$(find . -maxdepth 1 -name "gradlew" -type f -print | head -n 1)
         if [ -z "$GRADLEW_PATH" ]; then
           echo "Error: gradlew not found! Check your repository structure." >&2
           exit 1
