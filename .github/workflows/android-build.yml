@@ -20,7 +20,8 @@ jobs:
         java-version: '17'
 
     - name: Debug: List project files
-      run: ls -R
+      run: |
+        ls -R
 
     - name: Find and set Gradle wrapper path
       run: |
@@ -32,10 +33,11 @@ jobs:
         chmod +x "$GRADLEW_PATH"
         echo "Using gradlew at $GRADLEW_PATH"
         echo "GRADLEW_PATH=$GRADLEW_PATH" >> $GITHUB_ENV
-    
+
     - name: Build APK
-      run: $GRADLEW_PATH assembleRelease --stacktrace
-    
+      run: |
+        $GRADLEW_PATH assembleRelease --stacktrace
+
     - name: Upload Build Artifacts
       uses: actions/upload-artifact@v4
       with:
@@ -43,12 +45,12 @@ jobs:
         path: app/build/outputs/apk/release/*.apk
 
     - name: List available artifacts
-      run: ls -R $GITHUB_WORKSPACE
+      run: |
+        ls -R $GITHUB_WORKSPACE
 
     - name: Download a Build Artifact
       uses: actions/download-artifact@v4.2.1
       with:
         name: apk-release
         path: downloaded-artifacts
-
 
