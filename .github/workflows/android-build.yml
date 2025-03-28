@@ -19,11 +19,11 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Install dependencies
-      run: sudo apt-get update && sudo apt-get install -y openjdk-17-jdk
+    - name: Verify gradlew exists
+      run: ls -la
 
     - name: Grant execute permission to Gradle
-      run: chmod +x gradlew
+      run: chmod +x ./gradlew
 
     - name: Build APK
       run: ./gradlew assembleRelease --stacktrace
