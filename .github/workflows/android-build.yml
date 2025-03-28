@@ -19,7 +19,7 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name:Debug: List project files
+    - name: Debug: List project files
       run: |
         ls -R
 
@@ -39,7 +39,7 @@ jobs:
         $GRADLEW_PATH assembleRelease --stacktrace
 
     - name: Upload Build Artifacts
-      uses: actions/upload-artifact@v3
+      uses: actions/upload-artifact@v4
       with:
         name: apk-release
         path: app/build/outputs/apk/release/*.apk
@@ -53,3 +53,4 @@ jobs:
       with:
         name: apk-release
         path: downloaded-artifacts
+
