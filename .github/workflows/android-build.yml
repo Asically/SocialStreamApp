@@ -19,12 +19,8 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Debug:Locate gradlew
-      run: |
-       echo "Listing all files in the repository:"
-       ls -R
-       echo "Searching for gradlew:"
-       find . -name "gradlew" -type f
+    - name: Grant execute permission for gradlew
+      run: chmod +x ./gradlew
 
 
     # Find and set Gradle wrapper path in root directory (no need for ./project)
