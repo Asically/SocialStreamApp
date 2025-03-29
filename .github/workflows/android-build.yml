@@ -19,9 +19,13 @@ jobs:
         distribution: 'temurin'
         java-version: '17'
 
-    - name: Debug:List project files
+    - name: Debug:Locate gradlew
       run: |
-        ls -R
+       echo "Listing all files in the repository:"
+       ls -R
+       echo "Searching for gradlew:"
+       find . -name "gradlew" -type f
+
 
     # Find and set Gradle wrapper path in root directory (no need for ./project)
     - name: Find and set Gradle wrapper path (Root directory)
